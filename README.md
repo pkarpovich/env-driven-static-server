@@ -13,6 +13,16 @@ To use `env-driven-static-server`, start the container with the necessary enviro
 docker run -e VITE_API_BASE_URL=http://api.example.com env-driven-static-server
 ```
 
+An example `Dockerfile` for deploying a React application using `env-driven-static-server`:
+
+```Dockerfile
+FROM ghcr.io/pkarpovich/env-driven-static-server:latest
+COPY --from=builder /app/dist/ /public
+```
+
+This Dockerfile uses the `env-driven-static-server` as a base image and copies the build artifacts from the `builder` stage into the `/public` directory of the container.
+
+
 This will inject the environment variables into the frontend application, making them accessible as follows:
 
 ```javascript
