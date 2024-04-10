@@ -4,10 +4,11 @@ set -e
 
 INDEX_HTML_PATH="/public/index.html"
 ENV_JS_FILE_PATH="/public/env-config.js"
+ENV_PREFIX="${ENV_PREFIX:-VITE_}"
 
 echo "window._env_ = {" >> $ENV_JS_FILE_PATH
 
-for var in $(env | grep ^VITE_ | cut -d= -f1)
+for var in $(env | grep "^${ENV_PREFIX}" | cut -d= -f1)
 do
     echo "    $var: \"$(printenv $var)\"," >> $ENV_JS_FILE_PATH
 done
